@@ -14,7 +14,6 @@ import {Oauth2Controller} from "../ui/controller";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {CqrsModule} from "@nestjs/cqrs";
 
-
 export const CommandHandlers = [
     CreateClientHandler,
     CreateAccessTokenHandler,
@@ -27,13 +26,13 @@ export const QueryHandlers = [];
 export const Sagas = [];
 
 export const Services = [
-    {provide: 'ClientRepositoryInterface', useClass: ClientRepository},
-    {provide: 'AccessTokenRepositoryInterface', useClass: AccessTokenRepository},
+    {provide: "ClientRepositoryInterface", useClass: ClientRepository},
+    {provide: "AccessTokenRepositoryInterface", useClass: AccessTokenRepository},
 ];
 
 export const ServiceNames = [
-    'ClientRepositoryInterface',
-    'AccessTokenRepositoryInterface',
+    "ClientRepositoryInterface",
+    "AccessTokenRepositoryInterface",
 ];
 
 export const Resolvers = [];
@@ -73,7 +72,8 @@ export class Oauth2CoreModule implements OnModuleInit {
         };
 
         const userLoaderProvider = {
-            provide: 'UserLoaderInterface',
+            provide: "UserLoaderInterface",
+            // tslint:disable-next-line: no-shadowed-variable
             useFactory: async (options) => {
                 return options.userLoader;
             },
@@ -81,7 +81,8 @@ export class Oauth2CoreModule implements OnModuleInit {
         };
 
         const userValidatorProvider = {
-            provide: 'UserValidatorInterface',
+            provide: "UserValidatorInterface",
+            // tslint:disable-next-line: no-shadowed-variable
             useFactory: async (options) => {
                 return options.userValidator;
             },
@@ -127,7 +128,8 @@ export class Oauth2CoreModule implements OnModuleInit {
         const providers: Provider[] = this.createAsyncProviders(options);
 
         const userLoaderProvider = {
-            provide: 'UserLoaderInterface',
+            provide: "UserLoaderInterface",
+            // tslint:disable-next-line: no-shadowed-variable
             useFactory: async (options) => {
                 return options.userLoader;
             },
@@ -135,7 +137,8 @@ export class Oauth2CoreModule implements OnModuleInit {
         };
 
         const userValidatorProvider = {
-            provide: 'UserValidatorInterface',
+            provide: "UserValidatorInterface",
+            // tslint:disable-next-line: no-shadowed-variable
             useFactory: async (options) => {
                 return options.userValidator;
             },

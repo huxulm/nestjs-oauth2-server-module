@@ -3,7 +3,6 @@ import {UserInterface, UserLoaderInterface} from "../../../lib/domain/interface"
 import {InvalidUserException} from "../../../lib/domain/exception";
 import {users} from "./users";
 
-
 @Injectable()
 export class UserLoader implements UserLoaderInterface {
     async load(userId: string): Promise<UserInterface> {
@@ -12,7 +11,7 @@ export class UserLoader implements UserLoaderInterface {
                 id: users[userId],
                 username: users[userId],
                 email: users[userId],
-            }
+            };
         }
 
         throw InvalidUserException.withId(userId);

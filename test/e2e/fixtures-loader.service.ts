@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {Connection, DeepPartial, getRepository} from "typeorm";
-import * as path from 'path';
-import { Builder, fixturesIterator, Loader, Parser, Resolver } from 'typeorm-fixtures-cli/dist';
+import * as path from "path";
+import { Builder, fixturesIterator, Loader, Parser, Resolver } from "typeorm-fixtures-cli/dist";
 
 @Injectable()
 export class FixturesLoaderService {
@@ -24,5 +24,5 @@ export class FixturesLoaderService {
             console.log(err);
             throw err;
         }
-    };
+    }
 }

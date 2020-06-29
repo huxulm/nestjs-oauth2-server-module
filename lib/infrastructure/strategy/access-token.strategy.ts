@@ -1,16 +1,16 @@
-import {Strategy} from 'passport-http-bearer';
-import {PassportStrategy} from '@nestjs/passport';
-import {Inject, Injectable, UnauthorizedException} from '@nestjs/common';
+import {Strategy} from "passport-http-bearer";
+import {PassportStrategy} from "@nestjs/passport";
+import {Inject, Injectable, UnauthorizedException} from "@nestjs/common";
 import {AccessTokenRepositoryInterface} from "../../domain/repository";
 import {ClientPayload, Oauth2PayloadInterface, UserPayload} from "../../domain/interface";
 import {UserLoaderInterface} from "../../domain/interface/user-loader.interface";
 
 @Injectable()
-export class AccessTokenStrategy extends PassportStrategy(Strategy, 'access-token') {
+export class AccessTokenStrategy extends PassportStrategy(Strategy, "access-token") {
     constructor(
-        @Inject('AccessTokenRepositoryInterface')
+        @Inject("AccessTokenRepositoryInterface")
         private readonly accessTokenRepository: AccessTokenRepositoryInterface,
-        @Inject('UserLoaderInterface')
+        @Inject("UserLoaderInterface")
         private readonly userLoader: UserLoaderInterface
     ) {
         super();

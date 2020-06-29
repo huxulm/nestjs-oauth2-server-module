@@ -3,8 +3,8 @@ import {
     ClientEntity, ClientNotFoundException
 } from "../../domain";
 import {Repository} from "typeorm";
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
+import {Injectable} from "@nestjs/common";
+import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class ClientRepository implements ClientRepositoryInterface {
@@ -26,7 +26,7 @@ export class ClientRepository implements ClientRepositoryInterface {
     async findByClientId(clientId: string): Promise<ClientEntity> {
         const client = await this.repository.findOne({
             where: {
-                clientId: clientId
+                clientId
             }
         });
 
@@ -40,7 +40,7 @@ export class ClientRepository implements ClientRepositoryInterface {
     async findByName(name: string): Promise<ClientEntity> {
         const client = await this.repository.findOne({
             where: {
-                name: name
+                name
             }
         });
 

@@ -23,5 +23,5 @@ services:
 ################################################
 networks:
   switchit:
-    driver: overlay
+    driver: bridge
     attachable: true

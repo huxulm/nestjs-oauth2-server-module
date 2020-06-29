@@ -5,7 +5,7 @@ import {AccessTokenEntity, AccessTokenRepositoryInterface, ClientEntity, ClientR
 import {CreateAccessTokenCommand} from "../../app/command";
 import {CommandBus} from "@nestjs/cqrs";
 
-@Oauth2GrantStrategy('refresh_token')
+@Oauth2GrantStrategy("refresh_token")
 export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
 
     /**
@@ -16,9 +16,9 @@ export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
      * @param commandBus
      */
     constructor(
-        @Inject('ClientRepositoryInterface')
+        @Inject("ClientRepositoryInterface")
         private readonly clientRepository: ClientRepositoryInterface,
-        @Inject('AccessTokenRepositoryInterface')
+        @Inject("AccessTokenRepositoryInterface")
         private readonly accessTokenRepository: AccessTokenRepositoryInterface,
         private readonly commandBus: CommandBus,
     ) {
@@ -62,7 +62,9 @@ export class RefreshTokenStrategy implements Oauth2GrantStrategyInterface {
         return new OAuth2Response(
             accessToken.accessToken,
             accessToken.refreshToken,
+            // tslint:disable-next-line: no-bitwise
             ~~((accessToken.accessTokenExpiresAt.getTime() - Date.now()) / 1000),
+            // tslint:disable-next-line: no-bitwise
             ~~((accessToken.refreshTokenExpiresAt.getTime() - Date.now()) / 1000),
         );
     }

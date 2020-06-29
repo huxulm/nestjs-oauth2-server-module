@@ -1,5 +1,5 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
+import {Injectable} from "@nestjs/common";
+import {InjectRepository} from "@nestjs/typeorm";
 import {
     AccessTokenRepositoryInterface,
     AccessTokenEntity,
@@ -13,14 +13,14 @@ export class AccessTokenRepository implements AccessTokenRepositoryInterface {
     constructor(
         @InjectRepository(AccessTokenEntity)
         private readonly repository: Repository<AccessTokenEntity>
-    ){}
+    ) {}
 
     async findByAccessToken(accessToken: string): Promise<AccessTokenEntity> {
         const token = await this.repository.findOne({
             where: {
-                accessToken: accessToken
+                accessToken
             },
-            relations: ['client']
+            relations: ["client"]
         });
 
         if (!token) {
@@ -33,9 +33,9 @@ export class AccessTokenRepository implements AccessTokenRepositoryInterface {
     async findByRefreshToken(refreshToken: string): Promise<AccessTokenEntity> {
         const token =  await this.repository.findOne({
             where: {
-                refreshToken: refreshToken
+                refreshToken
             },
-            relations: ['client']
+            relations: ["client"]
         });
 
         if (!token) {

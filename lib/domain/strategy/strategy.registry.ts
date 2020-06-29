@@ -47,7 +47,7 @@ export class Oauth2GrantStrategyRegistry {
 
     /**
      * Validate the client associated to the given request
-     * 
+     *
      * @param request
      * @param client
      */

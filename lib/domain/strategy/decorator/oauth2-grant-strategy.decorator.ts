@@ -1,5 +1,5 @@
-import 'reflect-metadata';
-import { OAUTH2_STRATEGY_METADATA } from '../strategy.explorer';
+import "reflect-metadata";
+import { OAUTH2_STRATEGY_METADATA } from "../strategy.explorer";
 
 export const Oauth2GrantStrategy = (name: string): ClassDecorator => {
     return (target: object) => {

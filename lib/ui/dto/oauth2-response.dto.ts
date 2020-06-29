@@ -1,55 +1,55 @@
-import {ApiModelProperty} from "@nestjs/swagger";
+// import {ApiModelProperty} from "@nestjs/swagger";
 import {Exclude, Expose} from "class-transformer";
 
 /**
  * Main object used to transport data
  */
 export class OAuth2Response {
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type:String,
         description: 'The generated access token',
         required: true
-    })
+    }) */
     @Expose({name: 'access_token'})
     accessToken: string;
 
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type:String,
         description: 'The type of token, in our case should always be "bearer"',
         required: true
-    })
+    }) */
     @Expose({name: 'token_type'})
     tokenType: string = 'bearer';
 
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type: String,
         description: 'The generated refresh token',
         required: true
-    })
+    }) */
     @Expose({name: 'refresh_token'})
     refreshToken: string;
 
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type: Number,
         description: 'Number of seconds until the acess token expires',
         required: true
-    })
+    }) */
     @Expose({name: 'expires_in'})
     accessTokenExp: number;
 
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type: Number,
         description: 'The list of the permissions (tpApps) that the application requests.',
         required: true
-    })
+    }) */
     @Exclude()
     refreshTokenExp: number;
 
-    @ApiModelProperty({
+    /* @ApiModelProperty({
         type: String,
         description: 'Scopes you are allowed to use if any requested',
         required: true
-    })
+    }) */
     @Expose({name: 'scope'})
     scope?: string;
 

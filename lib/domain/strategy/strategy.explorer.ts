@@ -1,13 +1,13 @@
-import {Injectable, Type} from '@nestjs/common';
-import {InstanceWrapper} from '@nestjs/core/injector/instance-wrapper';
-import {Module} from '@nestjs/core/injector/module';
-import {ModulesContainer} from '@nestjs/core/injector/modules-container';
+import {Injectable, Type} from "@nestjs/common";
+import {InstanceWrapper} from "@nestjs/core/injector/instance-wrapper";
+import {Module} from "@nestjs/core/injector/module";
+import {ModulesContainer} from "@nestjs/core/injector/modules-container";
 import {Oauth2GrantStrategyInterface} from "./oauth2-grant-strategy.interface";
 
-export const OAUTH2_STRATEGY_METADATA = '__oauth2GrantStrategy__';
+export const OAUTH2_STRATEGY_METADATA = "__oauth2GrantStrategy__";
 
 export interface Oauth2StrategyOptions {
-    strategies: Type<Oauth2GrantStrategyInterface>[];
+    strategies: Array<Type<Oauth2GrantStrategyInterface>>;
 }
 
 @Injectable()
@@ -27,11 +27,11 @@ export class StrategyExplorer {
     flatMap<T>(
         modules: Module[],
         callback: (instance: InstanceWrapper) => Type<any> | undefined,
-    ): Type<T>[] {
+    ): Array<Type<T>> {
         const items = modules
             .map(module => [...module.providers.values()].map(callback))
             .reduce((a, b) => a.concat(b), []);
-        return items.filter(element => !!element) as Type<T>[];
+        return items.filter(element => !!element) as Array<Type<T>>;
     }
 
     filterProvider(
@@ -45,6 +45,7 @@ export class StrategyExplorer {
         return this.extractMetadata(instance, metadataKey);
     }
 
+    // tslint:disable-next-line: ban-types
     extractMetadata(instance: Object, metadataKey: string): Type<any> {
         if (!instance.constructor) {
             return;

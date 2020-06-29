@@ -2,8 +2,8 @@ import {AccessTokenEntity} from "../access-token.entity";
 
 /** define payload types */
 export enum Oauth2PayloadType {
-    CLIENT ='client',
-    USER = 'user',
+    CLIENT = "client",
+    USER = "user",
 }
 
 /**
@@ -18,5 +18,5 @@ export interface Oauth2PayloadInterface {
     readonly accessToken: AccessTokenEntity;
 
     // The ID is common to all
-    readonly id:  string;
+    readonly id: string;
 }

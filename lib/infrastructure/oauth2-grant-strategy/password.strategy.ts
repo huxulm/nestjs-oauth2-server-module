@@ -5,7 +5,7 @@ import {AccessTokenEntity, ClientEntity, ClientRepositoryInterface, UserValidato
 import {CreateAccessTokenCommand} from "../../app/command";
 import {CommandBus} from "@nestjs/cqrs";
 
-@Oauth2GrantStrategy('password')
+@Oauth2GrantStrategy("password")
 export class PasswordStrategy implements Oauth2GrantStrategyInterface {
 
     /**
@@ -16,9 +16,9 @@ export class PasswordStrategy implements Oauth2GrantStrategyInterface {
      * @param commandBus
      */
     constructor(
-        @Inject('ClientRepositoryInterface')
+        @Inject("ClientRepositoryInterface")
         private readonly clientRepository: ClientRepositoryInterface,
-        @Inject('UserValidatorInterface')
+        @Inject("UserValidatorInterface")
         private readonly userValidator: UserValidatorInterface,
         private readonly commandBus: CommandBus
     ) {
@@ -38,7 +38,7 @@ export class PasswordStrategy implements Oauth2GrantStrategyInterface {
 
     async getOauth2Response(request: OAuth2Request, client: ClientEntity): Promise<OAuth2Response> {
         const user = await this.userValidator.validate(request.username, request.password);
-        const requestScopes = typeof request.scopes === 'string' ? [request.scopes] : request.scopes;
+        const requestScopes = typeof request.scopes === "string" ? [request.scopes] : request.scopes;
         const accessToken: AccessTokenEntity = await this.commandBus.execute(new CreateAccessTokenCommand(
             client.id,
             JSON.stringify(requestScopes),
@@ -51,7 +51,9 @@ export class PasswordStrategy implements Oauth2GrantStrategyInterface {
         return new OAuth2Response(
             accessToken.accessToken,
             accessToken.refreshToken,
+            // tslint:disable-next-line: no-bitwise
             ~~((accessToken.accessTokenExpiresAt.getTime() - Date.now()) / 1000),
+            // tslint:disable-next-line: no-bitwise
             ~~((accessToken.refreshTokenExpiresAt.getTime() - Date.now()) / 1000),
         );
     }
